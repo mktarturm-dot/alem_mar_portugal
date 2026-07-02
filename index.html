@@ -381,20 +381,20 @@ addEventListener('keydown',e=>{
  if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight',' '].includes(e.key))e.preventDefault();
  keys[e.key.toLowerCase()]=true;
  if(G&&G.screen==='play'){
-   if((e.key==='e'||e.key==='E'||e.key==='Enter')&&$('dlg').style.display==='block'&&!dlgChoices)nextLine();
+   if((e.key==='e'||e.key==='E'||e.key==='Enter')&&$('dlg').style.display==='block'&&$('dlgChoices').children.length===0)nextLine();
    else if(e.key==='e'||e.key==='E'||e.key==='Enter')interact();
    if(e.key===' '&&!dlgOpen())attack();
  }
 });
 addEventListener('keyup',e=>keys[e.key.toLowerCase()]=false);
-$('dlgBox').addEventListener('click',()=>{if(!dlgChoices)nextLine();});
+$('dlgBox').addEventListener('click',()=>{if($('dlgChoices').children.length===0)nextLine();});
 function bindHold(id,k){const el=$(id);
  const on=e=>{e.preventDefault();keys[k]=true}, off=e=>{e.preventDefault();keys[k]=false};
  el.addEventListener('touchstart',on,{passive:false}); el.addEventListener('touchend',off);
  el.addEventListener('touchcancel',off); el.addEventListener('mousedown',on); el.addEventListener('mouseup',off);}
 bindHold('dU','arrowup');bindHold('dD','arrowdown');bindHold('dL','arrowleft');bindHold('dR','arrowright');
 $('bA').addEventListener('touchstart',e=>{e.preventDefault();
- if($('dlg').style.display==='block'&&!dlgChoices)nextLine(); else interact();},{passive:false});
+ if($('dlg').style.display==='block'&&$('dlgChoices').children.length===0)nextLine(); else interact();},{passive:false});
 $('bB').addEventListener('touchstart',e=>{e.preventDefault(); if(!dlgOpen())attack();},{passive:false});
 
 /* ---------------- Interação e cenas ---------------- */
